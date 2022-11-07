@@ -61,12 +61,12 @@ Notice that there is only one process from inside the container:
 
 should not be empty, show without the grep should see the other process in the system
 
-    $ podman ps
+    $ docker ps
     
     CONTAINER ID  IMAGE                              COMMAND          CREATED         STATUS             PORTS                   NAMES
     7a02ccc02de9  quay.io/sunix/hello-tomcat:latest  catalina.sh run  25 seconds ago  Up 25 seconds ago  0.0.0.0:8888->8080/tcp  funny_elbakyan
     
-    $ podman exec -it 7a02ccc02de9 bash
+    $ docker exec -it 7a02ccc02de9 bash
     root@7a02ccc02de9:/usr/local/tomcat# ps -awx
         PID TTY      STAT   TIME COMMAND
           1 ?        Ssl    0:03 /usr/local/openjdk-11/bin/java -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties -D
