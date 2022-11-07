@@ -40,16 +40,100 @@ Build the war
 Build the container image
 
     $ docker build -f src/main/docker/Dockerfile -t quay.io/sunix/hello-tomcat .
-    
+
+Before runing the container, notice that there is no tomcat process
+
+    $ ps -awx | grep tomcat
+
 Test:
 
     $ docker run -p 8888:8080 quay.io/sunix/hello-tomcat
 
 Try it: http://localhost:8888
 
-Push the container image to the registry
+Optionally push the container image to the registry
 
     $ docker push quay.io/sunix/hello-tomcat
+
+Notice that there is only one process from inside the container:
+
+    $ ps -awx | grep tomcat
+
+should not be empty, show without the grep should see the other process in the system
+
+    $ podman ps
+    
+    CONTAINER ID  IMAGE                              COMMAND          CREATED         STATUS             PORTS                   NAMES
+    7a02ccc02de9  quay.io/sunix/hello-tomcat:latest  catalina.sh run  25 seconds ago  Up 25 seconds ago  0.0.0.0:8888->8080/tcp  funny_elbakyan
+    
+    $ podman exec -it 7a02ccc02de9 bash
+    root@7a02ccc02de9:/usr/local/tomcat# ps -awx
+        PID TTY      STAT   TIME COMMAND
+          1 ?        Ssl    0:03 /usr/local/openjdk-11/bin/java -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties -D
+         48 pts/0    Ss     0:00 bash
+         50 pts/0    R+     0:00 ps -awx
+
+### It is big distributed YAML database
+
+Create a namespace and switch to it:
+
+    $ kubectl create namespace demo
+
+    $ kubectl config set-context --current --namespace=demo
+
+
+Look at this "CRD" it is like a database schema !
+
+```
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  # name must match the spec fields below, and be in the form: <plural>.<group>
+  name: helloresources.stable.world.com
+spec:
+  # group name to use for REST API: /apis/<group>/<version>
+  group: stable.world.com
+  # list of versions supported by this CustomResourceDefinition
+  versions:
+    - name: v1
+      # Each version can be enabled/disabled by Served flag.
+      served: true
+      # One and only one version must be marked as the storage version.
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                hello:
+                  type: string
+  # either Namespaced or Cluster
+  scope: Namespaced
+  names:
+    # plural name to be used in the URL: /apis/<group>/<version>/<plural>
+    plural: helloresources
+    # singular name to be used as an alias on the CLI and for display
+    singular: helloresource
+    # kind is normally the CamelCased singular type. Your resource manifests use this.
+    kind: HelloResource
+    # shortNames allow shorter string to match your resource on the CLI
+    shortNames:
+    - hr
+```
+
+and you can create a new `hello` resource:
+```
+$ cat <<EOF | kubectl apply -f -
+apiVersion: "stable.world.com/v1"
+kind: HelloResource
+metadata:
+  name: hello-world
+spec:
+  hello: "world"
+EOF
+```
 
 
 ### YAML

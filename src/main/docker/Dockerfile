@@ -4,6 +4,6 @@
 # $ docker run quay.io/sunix/hello-tomcat
 
 # https://hub.docker.com/_/tomcat
-FROM docker.io/tomcat:9.0-jdk11-openjdk-slim
+FROM docker.io/tomcat:9.0-jdk11-openjdk
 
 COPY target/*.war /usr/local/tomcat/webapps/ROOT.war

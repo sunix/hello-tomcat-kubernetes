@@ -19,6 +19,7 @@ spec:
         image: quay.io/sunix/hello-tomcat
         ports:
         - containerPort: 8080
+        imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service
