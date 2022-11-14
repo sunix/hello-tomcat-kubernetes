@@ -3,4 +3,11 @@ kind: HelloResource
 metadata:
   name: hello-world
 spec:
-  hello: "world"
+  hello: "World"
+---
+apiVersion: "stable.world.com/v1"
+kind: HelloResource
+metadata:
+  name: hello-jug
+spec:
+  hello: "Nantes JUG"

@@ -4,14 +4,18 @@ metadata:
   # name must match the spec fields below, and be in the form: <plural>.<group>
   name: helloresources.stable.world.com
 spec:
-  # group name to use for REST API: /apis/<group>/<version>
   group: stable.world.com
-  # list of versions supported by this CustomResourceDefinition
+  scope: Namespaced
+  names:
+    plural: helloresources
+    singular: helloresource
+    kind: HelloResource
+    shortNames:
+    - hr
   versions:
     - name: v1
       # Each version can be enabled/disabled by Served flag.
       served: true
-      # One and only one version must be marked as the storage version.
       storage: true
       schema:
         openAPIV3Schema:
@@ -22,15 +26,3 @@ spec:
               properties:
                 hello:
                   type: string
-  # either Namespaced or Cluster
-  scope: Namespaced
-  names:
-    # plural name to be used in the URL: /apis/<group>/<version>/<plural>
-    plural: helloresources
-    # singular name to be used as an alias on the CLI and for display
-    singular: helloresource
-    # kind is normally the CamelCased singular type. Your resource manifests use this.
-    kind: HelloResource
-    # shortNames allow shorter string to match your resource on the CLI
-    shortNames:
-    - hr
