@@ -8,6 +8,6 @@ spec:
 apiVersion: "stable.world.com/v1"
 kind: HelloResource
 metadata:
-  name: hello-jug
+  name: hello-devfest-mons-2022
 spec:
-  hello: "Nantes JUG"
+  hello: "DevFest Mons 2022"

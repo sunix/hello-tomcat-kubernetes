@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    app: hellotomcat
+spec:
+  containers:
+  - name: hellotomcat-container
+    image: quay.io/sunix/hello-tomcat
+    ports:
+    - containerPort: 8080
+    imagePullPolicy: IfNotPresent
