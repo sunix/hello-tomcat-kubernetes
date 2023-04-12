@@ -15,6 +15,10 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+    <jkube.createExternalUrls>true</jkube.createExternalUrls>
+    <jkube.replicas>5</jkube.replicas>
+    <jkube.generator.name>quay.io/sunix/hello-tomcat</jkube.generator.name>
+    <jkube.enricher.jkube-service.type>LoadBalancer</jkube.enricher.jkube-service.type>
   </properties>
 
   <dependencies>
@@ -46,6 +50,11 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.3.2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.jkube</groupId>
+        <artifactId>kubernetes-maven-plugin</artifactId>
+        <version>1.12.0</version>
       </plugin>
     </plugins>
   </build>

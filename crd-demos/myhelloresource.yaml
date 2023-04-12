@@ -8,6 +8,6 @@ spec:
 apiVersion: "stable.world.com/v1"
 kind: HelloResource
 metadata:
-  name: hello-devfest-mons-2022
+  name: hello-jug-2023
 spec:
-  hello: "DevFest Mons 2022"
+  hello-non-in-the-schema: "Atlanta JUG 2023"

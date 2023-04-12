@@ -5,7 +5,7 @@ metadata:
   labels:
     app: hellotomcat
 spec:
-  replicas: 10
+  replicas: 1
   selector:
     matchLabels:
       app: hellotomcat

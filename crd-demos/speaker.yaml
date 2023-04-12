@@ -1,0 +1,17 @@
+apiVersion: "stable.world.com/v1"
+kind: Speaker
+metadata:
+  name: horacio
+spec:
+  name: "Horacio"
+  title: "DevRel at OVH Cloud"
+  action: "speak"
+---
+apiVersion: "stable.world.com/v1"
+kind: Speaker
+metadata:
+  name: sebastien-blanc
+spec:
+  name: "Sebi"
+  title: "DevRel at Aiven"
+  action: "speak"

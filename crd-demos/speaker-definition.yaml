@@ -1,0 +1,32 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  # name must match the spec fields below, and be in the form: <plural>.<group>
+  name: speakers.stable.world.com
+spec:
+  group: stable.world.com
+  scope: Namespaced
+  names:
+    plural: speakers
+    singular: speaker
+    kind: Speaker
+    shortNames:
+    - sk
+  versions:
+    - name: v1
+      # Each version can be enabled/disabled by Served flag.
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                name:
+                  type: string
+                title:
+                  type: string
+                action:
+                  type: string
